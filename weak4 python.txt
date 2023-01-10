@@ -1,0 +1,470 @@
+#1
+# special magic methods / dunder methods
+# operator overloading
+# polymorphism
+
+class Phone:
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = moodel
+        self.price = price
+        
+def phone_name(self):
+    return f"{self.brand} {self.model}"
+
+# str , repr
+def __str__(self):
+    return f'{self.band} {self.model}'
+
+def __repr__(self):
+    return f'{self.band} {self.model} and price is {self.price}'
+
+# 1 = [1,2,3]
+# print(l)
+my_phone = Phone('nokia', '1100', 1000)
+print(str(my_phone))
+print(repr(my_phone))
+
+
+# operator overloading
+# polymorphism
+
+class Phone:
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = moodel
+        self.price = price
+        
+def phone_name(self):
+    return f"{self.brand} {self.model}"
+
+# str , repr
+def __str__(self):
+    return f'{self.band} {self.model}'
+
+def __repr__(self):
+    return f'phone{self.brand}, {self.model}, {self.price}'
+
+def __len__(self):
+    return len(self.phone_name())
+
+
+# 1 = [1,2,3]
+# print(l)
+my_phone = Phone('nokia', '1100', 1000)
+print(str(my_phone))
+print(repr(my_phone))
+print(my_phone.__repr__())
+
+# def __mul__(self, other):
+#      return self.price * other.price
+
+class SmartPhone(Phone):
+    def __init__(self, brand, model, price, camera):
+        super().__init__(brand,model, price)
+        self.camera = camera
+        
+
+# 2
+# built in errors
+# exception , how to handle them
+# raise your own erros, debugging, etc etc
+
+# syntax error
+# def func:
+#     pass
+
+# name = 'harshit'*
+
+
+# indentation errors
+# def func():
+#      print('hello')
+#   print('world')    
+
+# value error 
+# s = '123'
+# print(int(s))
+
+
+# 3
+# Raise errors in python
+def add(a,b):
+    if (type(a) is int) and (type(b) is int):
+        return a+b
+    return 'OOPs you are passing wrong data type to function'
+
+print(add('2','3'))
+
+
+# 4
+# raise errors example 1
+# NotImpletedError
+# abstract method
+
+class Animal:
+    def __init__(self,name):
+        self.name = name
+        
+    def sound(self):
+        return 'meao meao'
+    
+class Dog(Animal):
+    def __init__(self,name,breed):
+        super().__init__(name)
+        self.breed = breed
+        
+class Cat(Animal):
+    def __init__(self,name,breed):
+        super().__init__(name)
+        self.breed = breed
+        
+doggy = Dog('boony','pug')
+print(doggy.sound())
+
+# NotImplementedError
+
+class Animal:
+    def __init__(self,name):
+        self.name = name
+        
+    def sound(self):
+      raise NotImplementedError('you have to define this method in subclasses')
+    
+class Dog(Animal):
+    def __init__(self,name,breed):
+        super().__init__(name)
+        self.breed = breed
+        
+    def sound(self):
+        return 'bhow bhow'
+        
+class Cat(Animal):
+    def __init__(self,name,breed):
+        super().__init__(name)
+        self.breed = breed
+        
+    def sound(self):
+        return 'meao meao'
+        
+doggy = Dog('boony','pug')
+print(doggy.sound())
+
+
+# 5
+# raise error example 2
+
+class Mobile:
+    def __init__(self,name):
+        self.name = name 
+        
+class MobileStore:
+    def __init__(self):
+        self.mobile = []
+        
+    def add_mobile(self,new_mobile):
+        if isinstance(new_mobile, Mobile):
+            self.mobiles.append(new_mobile)
+        else:
+            raise TypeError('new mobile should be object of Mobile class')
+        
+        
+oneplus = Mobile('one plus 6')
+smsung = 'samsung galaxy s8'
+mobostore = MobileStore()
+#  print(mobostore.mobiles)
+mobostore.add_mobile(oneplus)
+mobo_phones = mobostore.mobiles
+print(mobo_phones[0].name)
+
+
+#  6
+# Exception handling
+# try except else finally
+
+while True:
+    try:
+        age = int(input('entre your age')) # seven # 7
+        break
+    except ValueError:
+        print('maybe you entered  string instead of number , try again')
+    except:
+        print('unexpected error ....')
+        
+if age < 18:
+    print('You can\'t play this  game.')
+else:
+    print('you can play this game.')
+    
+
+
+# 7
+# else and finally clause in exception handling
+
+try:
+    number = int(input('entre a number : '))
+    
+except ValueError:
+    print("Please type integer !! s")    
+except:
+    print('unexpected error !!! ')
+else:
+    print(f'user input = {number}')
+finally:
+    print('finally block ........... ')
+    
+    
+# 8
+# make a function 'divide'
+# divide(a,b)
+
+print(divide(4,2)) # 2
+print(divide(4,8)) # please don't divide by zero , Zero
+print(divide('4',2)) # please input numbers only   
+
+
+# 9
+# solution
+def divide(a,b):
+    try:
+        return a/b
+    except ZeroDivisionError as err:
+        # print('you cannot divide a number by zero')
+        print(err)
+        
+    except TypeError as err:
+        print("number must be int or floats")
+        
+    except :
+        print("unexpected error")
+        
+print(divide(10,'2')) 
+
+
+# 10
+# python custom exceptions
+# Q - why custom exceptions?
+# A - To increase the readability of code .
+
+# example 
+class NameTooShortError(ValueError):
+    pass
+
+def validate(name):
+    if len(name) < 8:
+        raise NameTooShortError('name is too short')
+    
+username = input('Enter your name : ')
+validate(username)
+print(f'hello {username}')
+
+# NameTooShort
+
+# 11
+# Steps for debugging
+# 1.) set trace
+# 2.) execute code line by line
+
+pdb.set_trace()
+name = input ('Please type your name : ')
+age = input('Please type your age : ')
+print(f'hello{name} your age is {age}')
+age2 = int(age) + 5
+print(f'{name} you will be {age2} in next five years')
+
+
+# 11
+# readfile
+# open function
+# read method 
+# seek method
+# tell method
+# readline method
+# close method
+
+# print(f'cursor  position -{f.tell()'})
+
+# print(f.read())
+# print(f.readline(), end='')
+# print(f.readline())
+# print(f'cursor position - {f.tell{}}')
+# print('before seek method ')
+# f.seek(0)
+# print('after seek method')
+# print(f'cursor position - {f.tell()}')
+# print(f.read())
+
+# lines = f.readlines()
+# print(len(lines))
+# for line i lines:
+#      print(line,end='')
+
+
+
+# 12
+
+# f = open('files.txt')
+# f.read()
+# f.close()
+
+# with block
+# context manager
+with open('file1.txt') as f:
+    data = f.read()
+    print(data)
+    
+print(f.closed)
+
+# 13
+# write to file in pyhton
+# hello there
+# subscribe to my channel
+
+# w , a, r+
+
+with open('file.txt', 'r+') as f:
+    f.seek(len(f.read()))
+    f.write('please do it')
+    
+    
+    
+# 14
+# execrise read and write 
+Harshit,100
+Mohit,50
+Aaditya,200
+Nitish,500
+
+# Harshit's salary is 100
+# Mohit's salary is 50
+
+
+# 15
+# solution
+# Harshit's salary is 100
+# Mohit's salary is 50
+with open('salary.txt','r') as rf:
+    with open('output.txt', 'a') as wf:
+        for line in rf.readlines():
+            name,salary = line.split(',')
+            wf.write(f'{name}\'s salary is {salary} ')
+            
+            
+            
+# 16
+# with open('love_story.txt', 'r', encoding='utf-8') as f:
+#      print(f.encoding)
+#      data = f.raed()
+#      print(data) 
+
+
+with open('files.txt', 'r') as f:
+    data = f.read(100)
+    while len(data) > 0:
+        print(data)        
+    data = f.read(100)   
+    
+    
+    
+# 17
+
+# work with CSV files using python
+name,email,phone
+harshit,harshitvashisth@gmail.com,+919416614988
+mohit,mohitvashistha@gmail.com,+919416614988
+
+
+from csv import reader
+with open('file.csv','r') as f:
+    csv_reader = reader(f)
+    # iterator
+    next(csv_reader)
+    for now in csv_reader:
+        print(row)
+        
+        
+# 18
+
+# Read CSV files with DictReader in Python
+
+name,email,phone
+harshit,harshitvashisth@gmail.com,+919416614988
+mohit,mohitvashistha@gmail.com,+919416614988
+
+
+from csv import DictReader
+# ordered dict
+with open('files.csv', 'r') as f:
+    csv_reader = DictReader(f,delimiter='|')
+    for row in csv_reader:
+        print(row['email'])
+        
+        
+# 19
+# write to CSV File in python
+
+# writer , DictWriter
+from csv import writer
+with open('file3.csv','w',newline='') as f:
+    csv_writer = writer(f)
+    # method - writerow, writerows
+    # csv_writer.writerow(['name','country'])
+    # csv_writer.writerow(['mohit','INDIA'])
+    # csv_writer.writerow(['harshit','INDIA'])
+    
+    
+    csv_writer.writerow([['name','contry'],['mohit','INDIA'],['harshit','INDIA']])
+    
+    
+#  20
+# Write to csv using DictWriter in Python
+from csv import DictWriter
+with open('final.csv','w',newlines='') as f:
+    csv_writer = DictWriter(f,fieldnames=['firstname','lastname','age'])
+    csv_writer.writeheader()
+    csv_writer.writerows([
+        {'firstname':'harshit','lastname':'vashistha','age':500},
+        {'firstname':'harshit','lastname':'vashistha','age':500},
+        {'firstname':'harshit','lastname':'vashistha','age':500}
+    ])
+
+
+# 21
+# Read and Write CSV files simultaneously in python
+
+firstname,lastname,age
+harshit,vashistha,500
+mohit,vashistha,500
+
+# writer , Dictwriter
+from csv import DictReader, DictWriter
+with open('files.csv','r') as rf:
+    with open('files2.csv','w',newlines='') as wf:
+        csv_reader = DictReader(rf)
+        csv_writer = DictWriter(wf,fieldnames=['first_name','last_name','age'])
+        csv_writer.writerheader()
+        for row in csv_reader:
+            fname, lname, age = row['firstname'],row['lastname'],row['age']
+            csv_writer.writerow({
+                'first_name':fname.upper(),
+                'last_name':lname.upper(),
+            })
+            
+            
+# 22
+
+# OS Module python 
+import os
+# os.getcwd()
+# print(os.getcwd())
+# os.mkdir('movies')
+# print(os.path.exists('movies'))
+# if os.path.exists('movies'):
+#      print('already exists')
+# else:
+#          os.mkdir('movies')
+# open('files.txt','a').close()
+# os.mkdir(r'F:\stuff\movies')
+# for item in os.listdir(r'F:\stuff'):
+# path = os.path.join(r'F:\stuff',item)
+# print(path)
